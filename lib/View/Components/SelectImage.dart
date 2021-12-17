@@ -23,7 +23,8 @@ class _SelectImageState extends State<SelectImage> {
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Text("Pesquisar imagem da web"),
+          SizedBox(height: 30),
+          Text("Primeiro adicione uma imagem de capa:"),
           SizedBox(height: 10),
           Row(
             children: [
@@ -66,8 +67,7 @@ class _SelectImageState extends State<SelectImage> {
 
   }
 
-  Widget _listaImagens(String busca) {
-    _carregarImages(busca);
+  Widget _listaImagens() {
     return GridView.builder(
             // physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -86,6 +86,13 @@ class _SelectImageState extends State<SelectImage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _carregarImages("torta");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -96,7 +103,7 @@ class _SelectImageState extends State<SelectImage> {
         children: [
           _busca(),
           Expanded(
-            child: _listaImagens("torta"),
+            child: _listaImagens(),
           )
         ],
       )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myrecipes/Database/DB.dart';
 import 'package:myrecipes/Model/Receita.dart';
 import 'package:myrecipes/View/Components/ReceitaDetails.dart';
+import 'package:myrecipes/View/Components/SelectImage.dart';
 import 'package:myrecipes/View/Components/addReceita.dart';
 
 class Lista extends StatefulWidget {
@@ -50,7 +51,7 @@ class _ListaState extends State<Lista> {
                             ReceitaDetails(
                                 id: receitas[index].id,
                                 titulo: receitas[index].titulo,
-                                ingredientes: receitas[index].preparo,
+                                ingredientes: receitas[index].ingredientes,
                                 preparo: receitas[index].preparo,
                                 imagem: receitas[index].imagem
                             )
@@ -90,7 +91,7 @@ class _ListaState extends State<Lista> {
           ),
           IconButton(
             icon: Icon(Icons.add), onPressed: () { 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => addReceita() ));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectImage() ));
           },
           ),
         ],

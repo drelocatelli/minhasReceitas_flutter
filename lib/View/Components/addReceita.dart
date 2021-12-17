@@ -25,14 +25,6 @@ class _addReceitaState extends State<addReceita> {
 
     return Column(
       children: [
-        TextField(
-          controller: tituloIn,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Titulo"
-          ),
-        ),
-        SizedBox(height: 10),
         ElevatedButton(
             onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectImage() ));
@@ -42,6 +34,14 @@ class _addReceitaState extends State<addReceita> {
               backgroundColor: MaterialStateProperty.all<Color>(Colors.green)
             ),
             child: Text("Selecionar imagem")
+        ),
+        SizedBox(height: 10),
+        TextField(
+          controller: tituloIn,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Titulo"
+          ),
         ),
         SizedBox(height: 10),
         TextField(
@@ -87,6 +87,12 @@ class _addReceitaState extends State<addReceita> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Home() ), (route) => false);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         title: Text("Salvar receita"),
         backgroundColor: Colors.orange,
       ),
