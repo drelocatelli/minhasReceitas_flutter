@@ -98,7 +98,9 @@ class _addReceitaState extends State<addReceita> {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: _receitaForm()
+        child: SingleChildScrollView(
+            child: _receitaForm()
+        )
       ),
     );
   }
