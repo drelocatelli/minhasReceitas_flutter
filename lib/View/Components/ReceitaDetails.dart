@@ -51,18 +51,30 @@ class _ReceitaDetailsState extends State<ReceitaDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SelectableText(
-                        '''
-Receita de ${widget.titulo}
-
-
-Ingredientes:
---------------------------------------------------------------------------
-${widget.ingredientes}\n\n
-Preparo:
---------------------------------------------------------------------------
-${widget.preparo}''',
-                        toolbarOptions: ToolbarOptions(copy: true, cut: false, selectAll: true)),
+                    SelectableText.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Receita de ${widget.titulo}\n\n',
+                            style: TextStyle(color: Colors.deepOrange, fontSize: 28)
+                          ),
+                          TextSpan(
+                            text: 'Ingredientes:\n',
+                            style: TextStyle(color: Color.fromARGB(255, 236, 153, 128), fontSize: 20)
+                          ),
+                          TextSpan(
+                            text: '${widget.ingredientes}\n\n\n'
+                          ),
+                          TextSpan(
+                            text: 'Modo de preparo:\n',
+                            style: TextStyle(color: Color.fromARGB(255, 236, 153, 128), fontSize: 20)
+                          ),
+                          TextSpan(
+                            text: '${widget.preparo}'
+                          ),
+                        ]
+                      )
+                    ),
                   ],
                 ),
               ),

@@ -87,9 +87,8 @@ class _SelectImageState extends State<SelectImage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _carregarImages("torta");
+    _carregarImages("cake");
   }
 
   @override
@@ -102,8 +101,15 @@ class _SelectImageState extends State<SelectImage> {
       body: Column(
         children: [
           _busca(),
-          Expanded(
-            child: _listaImagens(),
+          Visibility(
+            visible: imagens.isNotEmpty,
+            replacement: Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: CircularProgressIndicator(),
+            ),
+            child: Expanded(
+              child: _listaImagens(),
+            ),
           )
         ],
       )

@@ -36,7 +36,7 @@ class DB {
       )
     ''');
 
-    await db.insert("receitas", {"titulo": "Primeira receita", "ingredientes": "ingrediente....", "preparo": "preparo...", "imagem": "https://image.shutterstock.com/image-photo/red-apple-isolated-on-white-260nw-1727544364.jpg"});
+    // await db.insert("receitas", {"titulo": "Primeira receita", "ingredientes": "ingrediente....", "preparo": "preparo...", "imagem": "https://image.shutterstock.com/image-photo/red-apple-isolated-on-white-260nw-1727544364.jpg"});
 
   }
 

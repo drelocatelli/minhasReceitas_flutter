@@ -14,12 +14,11 @@ class Lista extends StatefulWidget {
 
 class _ListaState extends State<Lista> {
 
-  late List<Receita> receitas;
+  List<Receita> receitas = [];
   bool isLoading = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     refreshReceitas();
   }
@@ -38,39 +37,51 @@ class _ListaState extends State<Lista> {
     return Container(
       child: Expanded(
         child: SingleChildScrollView(
-          child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: receitas.length,
-              itemBuilder: (context, index) {
-                return Material(
-                    color: Colors.transparent,
-                    child: ListTile(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                            ReceitaDetails(
-                                id: receitas[index].id,
-                                titulo: receitas[index].titulo,
-                                ingredientes: receitas[index].ingredientes,
-                                preparo: receitas[index].preparo,
-                                imagem: receitas[index].imagem
-                            )
-                        ));
-                      },
-                      title: Row(
-                        children: [
-                          ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.network(receitas[index].imagem, width: size.width * 0.18, height: size.height * 0.1, fit: BoxFit.fill)),
-                          Padding(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Text("${receitas[index].titulo}", style: TextStyle(fontSize: 18))
+          child: Visibility(
+            visible: receitas.isNotEmpty,
+            replacement: Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(25),
+              child: Text("Nenhuma receita foi salva."),
+            ),
+            child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: receitas.length,
+                itemBuilder: (context, index) {
+                  return Material(
+                      color: Colors.transparent,
+                      child: ListTile(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                              ReceitaDetails(
+                                  id: receitas[index].id,
+                                  titulo: receitas[index].titulo,
+                                  ingredientes: receitas[index].ingredientes,
+                                  preparo: receitas[index].preparo,
+                                  imagem: receitas[index].imagem
+                              )
+                          ));
+                        },
+                        title: Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.network(receitas[index].imagem, width: 80, height: 80, fit: BoxFit.cover)),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 20, top: 10),
+                                  child: Text("${receitas[index].titulo}", style: TextStyle(fontSize: 14))
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                );
-              }
+                  );
+                }
+            ),
           ),
         ),
       )
@@ -99,10 +110,10 @@ class _ListaState extends State<Lista> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: isLoading ? Container(padding: EdgeInsets.all(20), child: CircularProgressIndicator()) : Container(),
-          ),
-          _buildLista()
+          isLoading ? Container(padding: EdgeInsets.all(20), child: Center(child: Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: CircularProgressIndicator(),
+          ))) : _buildLista(),
         ],
       ),
     );
